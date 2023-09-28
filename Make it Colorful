@@ -1,0 +1,54 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <string>
+
+int main() {
+    // Set the random number generator
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    // Storing player names and roll information in variables
+    std::string player1Name, player2Name;
+    int player1Roll, player2Roll;
+
+    // Request the user's list of players.
+    std::cout << "Enter the name for Player 1: ";
+    std::cin >> player1Name;
+    std::cout << "Enter the name for Player 2: ";
+    std::cin >> player2Name;
+
+    // Each player rolls a 20-sided die.
+    player1Roll = std::rand() % 20 + 1;
+    player2Roll = std::rand() % 20 + 1;
+
+    // Storing critical results in variables
+    std::string player1Result = "", player2Result = "";
+
+    // Verify the key success or failure of the rolls.
+    if (player1Roll == 1) {
+        player1Result = "\033[1;31mCritical Failure\033[0m"; // Red color for Critical Failure
+    } else if (player1Roll == 20) {
+        player1Result = "\033[1;32mCritical Success\033[0m"; // Green color for Critical Success
+    }
+
+    if (player2Roll == 1) {
+        player2Result = "\033[1;31mCritical Failure\033[0m"; // Red color for Critical Failure
+    } else if (player2Roll == 20) {
+        player2Result = "\033[1;32mCritical Success\033[0m"; // Green color for Critical Success
+    }
+
+    // Show the outcomes
+    std::cout << player1Name << " rolled a " << player1Roll << " (" << player1Result << ")\n";
+    std::cout << player2Name << " rolled a " << player2Roll << " (" << player2Result << ")\n";
+
+    // Identify the winner or whether it's evenly matched .
+    if (player1Roll > player2Roll) {
+        std::cout << player1Name << " is the winner!\n";
+    } else if (player2Roll > player1Roll) {
+        std::cout << player2Name << " is the winner!\n";
+    } else {
+        std::cout << "Both players are evenly matched!\n";
+    }
+
+    return 0;
+}
